@@ -1,0 +1,81 @@
+<div class="register-card">
+<h2>Create account</h2>
+
+
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+
+
+<label class="field">
+<span>Full name</span>
+<input type="text" formControlName="fullName" placeholder="John Doe" />
+<small class="error" *ngIf="c['fullName'].touched && c['fullName'].invalid">
+<span *ngIf="c['fullName'].errors?.['required']">Name is required.</span>
+<span *ngIf="c['fullName'].errors?.['minlength']">Minimum 2 characters.</span>
+</small>
+</label>
+
+
+<label class="field">
+<span>Email</span>
+<input type="email" formControlName="email" placeholder="you@example.com" />
+<small class="error" *ngIf="c['email'].touched && c['email'].invalid">
+<span *ngIf="c['email'].errors?.['required']">Email is required.</span>
+
+</small>
+</label>
+
+
+<label class="field">
+<span>Mobile No</span>
+<input type="text" formControlName="mobile" placeholder="123-456-7890" />
+<small class="error" *ngIf="c['mobile'].touched && c['mobile'].invalid">
+<span *ngIf="c['mobile'].errors?.['required']">Mobile No is required.</span>
+
+</small>
+</label>
+
+
+<label class="field">
+<span>Father Name</span>
+<input type="text" formControlName="fatherName" placeholder="Father's Name" />
+<small class="error" *ngIf="c['fatherName'].touched && c['fatherName'].invalid">
+<span *ngIf="c['fatherName'].errors?.['required']">Father's Name is required.</span>
+
+</small>
+</label>
+
+
+<label class="field">
+<span>Password</span>
+<input type="password" formControlName="password" placeholder="••••••••" />
+<div class="pw-row">
+<small class="muted">At least 8 characters, mix of upper/lower, numbers or symbols.</small>
+</div>
+<small class="error" *ngIf="c['password'].touched && c['password'].invalid">
+<span *ngIf="c['password'].errors?.['required']">Password is required.</span>
+<span *ngIf="c['password'].errors?.['minlength']">Minimum 8 characters.</span>
+</small>
+</label>
+
+
+<label class="field">
+<span>Confirm password</span>
+<input type="password" formControlName="confirmPassword" placeholder="Confirm password" />
+<small class="error" *ngIf="(c['confirmPassword'].touched || registrationForm.touched) && registrationForm.errors">
+Passwords do not match.
+</small>
+</label>
+
+<button class="btn" type="submit" [disabled]="submitting">
+<span *ngIf="!submitting">Create account</span>
+<span *ngIf="submitting">Creating...</span>
+</button>
+
+
+</form>
+
+<div *ngIf="successMessage" class="success-message">
+  {{ successMessage }}
+</div>
+<p class="muted small">Already have an account? <a href="#/login">Sign in</a></p>
+</div>

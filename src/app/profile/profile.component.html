@@ -1,0 +1,68 @@
+<div class="container mt-5 profile-container">
+  <div class="row g-4">
+
+    <!-- Left Column: User Info -->
+    <div class="col-md-4">
+      <div class="card shadow-sm profile-card">
+        <div class="card-body text-center">
+          <img
+            [src]="user.avatar"
+            alt="User Avatar"
+            class="rounded-circle mb-3 profile-avatar"
+          />
+          <h4 class="card-title">{{ user.name }}</h4>
+          <p class="text-muted">{{ user.email }}</p>
+          <p><i class="bi bi-telephone"></i> {{ user.phone }}</p>
+          <p><i class="bi bi-geo-alt"></i> {{ user.address }}</p>
+          <p class="text-muted small">Joined on {{ user.joined | date }}</p>
+          <button class="btn btn-outline-primary btn-sm mt-3 me-2">
+            Edit Profile
+          </button>
+          <button class="btn btn-outline-danger btn-sm mt-3" (click)="logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Order History -->
+    <div class="col-md-8">
+      <div class="card shadow-sm order-card">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Order History</h5>
+
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Total ($)</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td>{{ order.id }}</td>
+                <td>{{ order.date | date }}</td>
+                <td>{{ order.total | number:'1.2-2' }}</td>
+                <td>
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'bg-success': order.status === 'Delivered',
+                      'bg-warning text-dark': order.status === 'Shipped',
+                      'bg-secondary': order.status === 'Pending'
+                    }"
+                  >
+                    {{ order.status }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

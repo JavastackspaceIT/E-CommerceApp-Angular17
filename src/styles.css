@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- Force dropdown to appear visibly over dark navbar --- */
+.navbar .dropdown-menu {
+  background-color: #f8f9fa !important; /* light background */
+  color: #212529 !important; /* dark text */
+  position: absolute !important; /* force position above other layers */
+  z-index: 1050 !important; /* ensure it appears above navbar */
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Make items readable and distinct */
+.navbar .dropdown-item {
+  color: #212529 !important;
+}
+
+.navbar .dropdown-item:hover {
+  background-color: #e9ecef !important;
+  color: #000 !important;
+}
+
+.nav-link.dropdown-toggle {
+    color: lab(96.57% -1.29 -1.55);
+}
