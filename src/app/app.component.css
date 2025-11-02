@@ -1,24 +1,21 @@
-/* --- Force dropdown to appear visibly over dark navbar --- */
-.navbar .dropdown-menu {
-  background-color: #f8f9fa !important; /* light background */
-  color: #212529 !important; /* dark text */
-  position: absolute !important; /* force position above other layers */
-  z-index: 1050 !important; /* ensure it appears above navbar */
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+.navbar-brand {
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
 }
 
-/* Make items readable and distinct */
-.navbar .dropdown-item {
-  color: #212529 !important;
+.nav-link {
+  font-weight: 500;
+  transition: 0.2s;
 }
 
-.navbar .dropdown-item:hover {
-  background-color: #e9ecef !important;
-  color: #000 !important;
+.nav-link:hover {
+  color: #ffe082 !important;
 }
 
+.dropdown-menu {
+  border-radius: 10px;
+}
 
-element.style {
-    color: darkred;
+.badge {
+  font-size: 0.7rem;
 }
