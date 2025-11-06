@@ -37,6 +37,7 @@ export class ProductComponent {
 addToCart(product: Product) {
   this.cartService.addToCart(product);
   alert(`${product.name} added to cart!`);
+    window.location.reload();
 }
 
 }

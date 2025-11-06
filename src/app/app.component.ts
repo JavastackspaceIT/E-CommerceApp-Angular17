@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -19,12 +19,15 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
   ngOnInit() {
     // Update cart count
+   // 👇 Listen to BehaviorSubject updates
     this.cartService.cartCount$.subscribe(count => {
       this.cartCount = count;
+      this.cdr.detectChanges(); // 🔥 Force re-render immediately
     });
 
     // React to login/logout events

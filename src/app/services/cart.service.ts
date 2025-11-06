@@ -1,16 +1,16 @@
-// src/app/services/cart.service.ts
+// cart.service.ts
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class CartService {
   private cartKey = 'shopkart_cart';
   private cartItems: any[] = [];
-  private cartCount = new BehaviorSubject<number>(0);
-  cartCount$ = this.cartCount.asObservable();
+  private cartCountSubject = new BehaviorSubject<number>(0);
+  cartCount$ = this.cartCountSubject.asObservable();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.loadCart();
@@ -18,23 +18,21 @@ export class CartService {
 
   private loadCart() {
     if (isPlatformBrowser(this.platformId)) {
-      const storedCart = localStorage.getItem(this.cartKey);
-      this.cartItems = storedCart ? JSON.parse(storedCart) : [];
-      this.cartCount.next(this.cartItems.length);
-    } else {
-      this.cartItems = [];
+      const stored = localStorage.getItem(this.cartKey);
+      this.cartItems = stored ? JSON.parse(stored) : [];
+      this.cartCountSubject.next(this.getTotalQuantity());
     }
   }
 
   private saveCart() {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(this.cartKey, JSON.stringify(this.cartItems));
-      this.cartCount.next(this.cartItems.length);
+      this.cartCountSubject.next(this.getTotalQuantity());
     }
   }
 
   addToCart(product: any) {
-    const existing = this.cartItems.find((item) => item.id === product.id);
+    const existing = this.cartItems.find(p => p.id === product.id);
     if (existing) {
       existing.quantity += 1;
     } else {
@@ -47,8 +45,12 @@ export class CartService {
     return this.cartItems;
   }
 
+  getTotalQuantity(): number {
+    return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
   removeFromCart(productId: number) {
-    this.cartItems = this.cartItems.filter((item) => item.id !== productId);
+    this.cartItems = this.cartItems.filter(p => p.id !== productId);
     this.saveCart();
   }
 
