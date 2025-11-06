@@ -20,10 +20,11 @@ export class AppComponent {
     private authService: AuthService,
     private cartService: CartService,
     private router: Router
-  ) {
+  ) {}
+  ngOnInit() {
     // Update cart count
-    this.cartService.cartItems$.subscribe(items => {
-      this.cartCount = items.length;
+    this.cartService.cartCount$.subscribe(count => {
+      this.cartCount = count;
     });
 
     // React to login/logout events

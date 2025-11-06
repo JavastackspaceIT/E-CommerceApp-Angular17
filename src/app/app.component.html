@@ -47,19 +47,27 @@
             <i class="bi bi-box-seam me-1"></i> Products
           </a>
         </li>
-
-        <!-- Cart (only for logged-in users) -->
-        <li class="nav-item mx-1" *ngIf="username">
-          <a class="nav-link text-light position-relative" routerLink="/cart">
-            <i class="bi bi-cart3 fs-5"></i>
-            <span
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark"
-              *ngIf="cartCount > 0"
-            >
-              {{ cartCount }}
-            </span>
+         <!-- Cart -->
+        <li class="nav-item mx-1">
+          <a class="nav-link text-light" routerLink="/cart">
+            <i class="bi bi-box-seam me-1"></i> Cart
           </a>
         </li>
+
+        <!-- Cart (only for logged-in users) -->
+        <!-- Cart badge -->
+<li class="nav-item mx-1">
+  <a class="nav-link text-light position-relative" routerLink="/cart">
+    <i class="bi bi-cart3 fs-5"></i>
+    <span
+      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark"
+      *ngIf="cartCount > 0"
+    >
+      {{ cartCount }}
+    </span>
+  </a>
+</li>
+
 
         <!-- User Dropdown -->
         <li class="nav-item dropdown mx-1">
